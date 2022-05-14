@@ -48,5 +48,5 @@ public interface IAlunoService {
    */
   void delete(Long id);
 
-  List<AvaliacaoFisica> getAvaliacaoFIsicaId(Long id);
+  List<AvaliacaoFisica> getAvaliacaoFisicaCpf(Long id);
 }

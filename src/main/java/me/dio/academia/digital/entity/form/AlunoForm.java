@@ -3,10 +3,16 @@ package me.dio.academia.digital.entity.form;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import me.dio.academia.digital.entity.Aluno;
 import org.hibernate.validator.constraints.br.CPF;
 
-import javax.validation.constraints.*;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Past;
+import javax.validation.constraints.Size;
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
 @Data
 @NoArgsConstructor
@@ -30,4 +36,27 @@ public class AlunoForm {
     @NotNull(message = "Preencha o campo corretamente")
     @Past(message = " Data '${validatedValue}' é inválida")
     private LocalDate dataDeNascimento;
+
+
+    public static List<AlunoForm> wrapper(List<Aluno> alunos) {
+        List<AlunoForm> alunoForms = new ArrayList<>();
+        for (Aluno aluno : alunos) {
+            alunoForms.add(new AlunoForm(
+                    aluno.getNome(),
+                    aluno.getCpf(),
+                    aluno.getBairro(),
+                    aluno.getDataDeNascimento()
+            ));
+        }
+        return alunoForms;
+    }
+
+    public static AlunoForm wrapper(Aluno aluno) {
+        return new AlunoForm(
+                aluno.getNome(),
+                aluno.getCpf(),
+                aluno.getBairro(),
+                aluno.getDataDeNascimento()
+        );
+    }
 }
